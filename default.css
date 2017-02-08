@@ -1,0 +1,85 @@
+/*CSS Reset*/
+html,body,h1,h2,h3,h4,h5,h6,p,pre,code,address,variable,form,fieldset,blockquote,figure,ul,ol,textarea{
+    padding: 0;
+    margin: 0;
+}
+ul,ol{padding-left: 1em;}
+a img{border:none;}
+
+/*Main CSS*/
+body{
+    background: #333;
+    color: #fff;
+    font: 0.945em/1.5 "Lucida Grande","Lucida Sans Unicode","GNU Unifont",Verdana,Helvetica,sans-serif;
+}
+#wrapper{
+    max-width: 72em;
+    margin: 0 auto 2em;
+    overflow: hidden;
+}
+h1{
+    font-size: 1.5em;
+    margin: .5em 0;
+    text-align: center;
+}
+h2{font-size: 1.25em;}
+h3{font-size: 1.1em;}
+
+a{display: none;}
+a[href]{
+    color: #adf;
+    text-decoration: none;
+    display: inline;
+}
+a[href]:hover{text-decoration: underline;}
+
+textarea,input[type=text]{
+    box-sizing: border-box;
+    background-color: #222;
+    color: #eee;
+    border-style: solid;
+    border-color: #035F7E #0485b0 #0485b0 #035F7E;
+    border-radius: 3px;
+    padding: 1px 2px;
+}
+
+textarea{
+    height: 40em;
+    width: 100%;
+    resize: none;
+    padding: .4em .5em;
+    overflow-y: auto;
+}
+
+.fullTable{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1em;
+}
+.fullTable, .fullTable th, .fullTable td{border: 1px solid #0485b0;}
+.fullTable thead{background-color: #035F7E;}
+td{vertical-align: top;}
+.fullTable td > textarea, .fullTable td > input[type=text]{
+    width: 100%;
+    border: none;
+}
+
+#cellTimesInputArea table{margin: auto;}
+#chapterEditor td{text-align: right;}
+#chapterEditor td:first-child{text-align: center;}
+
+.disabled, .disabled input[type=text],input[type=text]:disabled{color: #666;}
+tr, tr input[type=text]{transition: color 200ms;}
+
+#cellTimes{display: block;}
+
+#chapterEditorArea, #outputArea, #decimationWarning,
+.no-filereader #cellTimesFile,
+.filereader #cellTimes,
+.no-blobconstructor #downloadOutput, .no-bloburls #downloadOutput,
+.blobconstructor.bloburls #textOutput{display: none;}
+
+input[value=Previous]{float: left;}
+input[value=Next]{float: right;}
+
+#fade{transition: opacity 400ms;}
