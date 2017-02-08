@@ -1,7 +1,7 @@
 # AviSynth-Utilities
 Small utility pages that I've written to help create AviSynth scripts
 
-##Split
+##[Split](https://csouthwick.github.io/AviSynth-Utilities/split/)
 Takes a sequence of frame numbers to split up a video, similar in concept to using the razor tool in Adobe Premiere. This is especially useful for applying filters to specific sections of a video or in cases where the parameters may vary in different parts.
 
  * Join - should be selected if the video is to be kept whole for exporting. If not selected, the output will be a bunch of commented out clips to be exported individually.
