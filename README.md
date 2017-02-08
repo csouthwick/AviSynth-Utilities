@@ -1,4 +1,4 @@
-# AviSynth-Utilities
+# AviSynth Utilities
 Small utility pages that I've written to help create AviSynth scripts. These were created for my own personal use to automate some of the repetetive tasks I encountered while editing video with AviSynth and as such are rather spartan.
 
 ##[Split](https://csouthwick.github.io/AviSynth-Utilities/split/)
