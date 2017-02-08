@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EDL Split</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../default.css" />
+        <script src="edl-split.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <textarea id="input" autofocus="autofocus" style="height: 10em; margin-top: 1em;"></textarea>
+            <label><input id="join" type="checkbox" /> Join clips</label><br />
+            <label><input id="stills" type="checkbox" /> Still images</label><br />
+            <label><input id="crop" type="checkbox" /> Add crop(0,0,0,0)</label><br />
+            <input type="button" value="Go" onclick="convertEdl()" />
+            <code style="display: block; white-space: pre;">
+                <output id="output" style="display: block;"></output>
+            </code>
+        </div>
+    </body>
+</html>
