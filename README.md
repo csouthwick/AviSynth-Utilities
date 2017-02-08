@@ -1,5 +1,5 @@
 # AviSynth-Utilities
-Small utility pages that I've written to help create AviSynth scripts
+Small utility pages that I've written to help create AviSynth scripts. These were created for my own personal use to automate some of the repetetive tasks I encountered while editing video with AviSynth and as such are rather spartan.
 
 ##[Split](https://csouthwick.github.io/AviSynth-Utilities/split/)
 Takes a sequence of frame numbers to split up a video, similar in concept to using the razor tool in Adobe Premiere. This is especially useful for applying filters to specific sections of a video or in cases where the parameters may vary in different parts.
