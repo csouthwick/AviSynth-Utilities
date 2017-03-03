@@ -19,7 +19,6 @@ body{
 }
 h1{
     font-size: 1.5em;
-    margin: .5em 0;
     text-align: center;
 }
 h2{font-size: 1.25em;}
@@ -32,6 +31,15 @@ a[href]{
     display: inline;
 }
 a[href]:hover{text-decoration: underline;}
+
+p,code,h1,h2{
+    margin: .5em 0;
+}
+
+code{
+    display: block;
+    white-space: pre-line;
+}
 
 textarea,input[type=text]{
     box-sizing: border-box;
