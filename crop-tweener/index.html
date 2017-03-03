@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Crop Tweener</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../default.css" />
+        <script src="crop-tweener.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Crop Tweener</h1>
+            <textarea id="input" autofocus="autofocus" style="height: 10em; margin-top: 1em;"></textarea>
+            <h2>Desired Resolution</h2>
+            <div>
+                LanczosResize(
+                <input type="number" id="width" />,
+                <input type="number" id="height" />)
+            </div>
+            <input type="button" value="Go" onclick="process()" />
+            <code style="display: block; white-space: pre;">
+                <output id="output" style="display: block;"></output>
+            </code>
+        </div>
+    </body>
+</html>
