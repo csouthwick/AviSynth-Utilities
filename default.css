@@ -37,8 +37,10 @@ p,code,h1,h2{
 }
 
 code{
-    display: block;
     white-space: pre-line;
+}
+output,code{
+    display: block;
 }
 
 textarea,input[type=text]{
