@@ -10,6 +10,20 @@
     <body>
         <div id="wrapper">
             <h1>Crop Tweener</h1>
+            <h2>Sample input</h2>
+            <p>
+                Any Trim() that does not have a .crop() after it will be have
+                .animate(... ,"LanczosResize", ...) added to it to animate
+                between the previous and next crop values
+            </p>
+            <code style="display: block; white-space: pre-line;">
+                c0=Trim(0,100-1).crop(0,0,0,0)
+                c1=Trim(100,200-1)
+                c2=Trim(200,0).crop(10,10,10,10)
+
+                c0+c1+c2
+            </code>
+            <h2>Input</h2>
             <textarea id="input" autofocus="autofocus" style="height: 10em; margin-top: 1em;"></textarea>
             <h2>Desired Resolution</h2>
             <div>
