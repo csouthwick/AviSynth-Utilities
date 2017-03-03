@@ -10,3 +10,11 @@ Takes a sequence of frame numbers to split up a video, similar in concept to usi
 
 ##[EDL Split](https://csouthwick.github.io/AviSynth-Utilities/edl-split/)
 A variation of Split which extracts the start frames from an [edit decision list](https://en.wikipedia.org/wiki/Edit_decision_list) (edl) file exported from Premiere. The goal here was to have Premiere keep track of which frames to split on instead of manually keeping track of a list of frames. As only the start frames are used, trimming, multiple source files, and other features of the edl format are not supported - although they may be in future versions. Premiere must be switched to display the timeline in frames instead of using a timecode before exporting the edl file as AviSynth does not support timecode based editing.
+
+##[Crop Tweener](https://csouthwick.github.io/AviSynth-Utilities/crop-tweener/)
+Used as one of the last steps in dealing with older videos from analog sources that have black bars on the sides that vary in width.
+
+1. Create a list of start frames of cuts as well as the start and end points of fades where the crop values will differ. This can either be done by manually copying down the frame numbers or by using the razor tool in Premiere.
+2. Use either Split or EDL Split from above to create clips that can be adjusted independently. "Add crop(0,0,0,0)" should be selected.
+3. Go through each resulting clip and adjust the crop values as needed. If a clip does not need any cropping, leave ".crop(0,0,0,0)" in place. Remove ".crop(0,0,0,0)" from any clip that fades or uses some other transition between two differently cropped clips. This is what tells Crop Tweener which clips need to be animated with a zoom in or zoom out to realign the clips.
+4. Copy and paste all of that into Crop Tweener's input box, fill out the Desired Resolution section, and press Go.
