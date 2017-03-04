@@ -18,3 +18,6 @@ Used as one of the last steps in dealing with older videos from analog sources t
 2. Use either Split or EDL Split from above to create clips that can be adjusted independently. "Add crop(0,0,0,0)" should be selected.
 3. Go through each resulting clip and adjust the crop values as needed. If a clip does not need any cropping, leave ".crop(0,0,0,0)" in place. Remove ".crop(0,0,0,0)" from any clip that fades or uses some other transition between two differently cropped clips. This is what tells Crop Tweener which clips need to be animated with a zoom in or zoom out to realign the clips.
 4. Copy and paste all of that into Crop Tweener's input box, fill out the Desired Resolution section, and press Go.
+
+##[AVS Clip Exporter](https://csouthwick.github.io/AviSynth-Utilities/avs-clip-exporter/)
+Takes in the name of a source AviSynth script and a series of commented out Trim() statements produced by Split or EDL Split (without the Join option) and creates an individual avs file for each bundled up in a zip file. Uses [zip.js](http://gildas-lormeau.github.io/zip.js/) from [Gildas Lormeau](https://github.com/gildas-lormeau) with [zlib-asm](https://github.com/ukyo/zlib-asm) from [Syu Kato](https://github.com/ukyo).
