@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>IfoEdit CellTimes to x264 qpf and ogg chapters</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="default.css" />
+        <script type="text/javascript" src="js/modernizr-custom.js"></script>
+        <script type="text/javascript" src="js/dvd-chapters.js"></script>
+        <!--[if ie 9]>
+        <script type="text/javascript" src="js/ie9-transitions.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div id="wrapper" class="importCells">
+            <h1>IfoEdit CellTimes to x264 qpf and ogg chapters</h1>
+            <noscript>JavaScript must be enabled in order to use this page.</noscript>
+
+            <section id="importCells">
+                <p>
+                    While making mp4 rips with chapter points, I discovered that
+                    DVD Decrypter (and a few other tools) create inaccurate 
+                    chapter files where the errors can accumulate to cause
+                    noticeable timing issues - especially in later chapters.
+                    IfoEdit does extract accurate timing information, but not
+                    in a format that is directly usable. So, I made this utility
+                    to convert IfoEdit Celltimes.txt files into more usable
+                    formats (namely x264 qpf files and ogg chapter files) as
+                    well as to provide some other helpful features. It only uses
+                    JavaScript in your browser, so there's no need to send data
+                    to a server. If you want you can even download this page as
+                    a single file and run it straight from your computer.
+                </p>
+                <h2>Import IfoEdit Celltimes.txt file</h2>
+                <p>
+                    To start, you need to use IfoEdit to export a Celltimes file
+                    for the video you're going to be working with. If you don't
+                    already have the file, click the Open button in IfoEdit's
+                    lower left corner and load the ifo file for the video. In
+                    the top pane, find and expand "VTS_PGCITI -Video Title Set
+                    Program Chain Information Table" and select the PGC that
+                    your video came from (compare the duration of the PGC to
+                    your video if you're unsure). Go up to the Tools menu and
+                    select "Save Celltimes to file." After that,
+                    <span class="fileInput">load the file here using the Browse button</span>
+                    <span class="textInput">open the file, copy and paste
+                        the contents into the text box,</span>
+                    and click Next.
+                </p>
+                <input id="cellTimesFile" accept="text/plain" type="file"
+                       onchange="loadCellTimesFile()" class="fileInput"/>
+                <textarea id="cellTimes" oninput="validate()" class="textInput"></textarea>
+                <input id="importBtn" type="button" value="Next"
+                       onclick="importCells()" disabled="disabled"/>
+            </section>
+
+            <section id="deleteCells">
+                <h2>Delete cells</h2>
+                <p>
+                    This is for if you uncheck some cells in DVD Decrypter's IFO
+                    Mode and need to compensate for the removed video. Usually
+                    useful for getting rid of cells that only have a small
+                    number of black video frames and no content. It may be worth
+                    checking to make sure that there is definitely no video
+                    <em>or</em> audio in the cell(s) before you do this.
+                </p>
+                <table id="deleteCellsEditor">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Cell</th>
+                            <th>Duration (frames)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <input type="button" value="Next" onclick="saveDeletions()"/>
+            </section>
+
+            <!--Merge cells (for when a chapter contains more than one cell)-->
+            <section id="mergeCells">
+                <h2>Merge cells</h2>
+                <p>
+                    Usually each DVD chapter is made up of a single cell, but
+                    sometimes they can contain multiple cells. As IfoEdit's
+                    Celltimes file does not provide any indication of which
+                    cells belong to which chapter, this allows you to merge
+                    cells that belong together by unchecking the ones that are
+                    <strong>not</strong> the start of a chapter. Use DVD
+                    Decrypter's IFO Mode as a reference for which cell belongs
+                    to which chapter.
+                </p>
+                <table id="mergeCellsEditor">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Source Cell</th>
+                            <th>Chapter</th>
+                            <th>Frame</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <input type="button" value="Next" onclick="saveMerge()"/>
+            </section>
+
+            <section id="editChapters">
+                <h2>Video and chapter information</h2>
+                <p>
+                    <span class="fileOutput">Fill in the title of the video
+                        (optional as filenames will default to "Chapters"
+                        if none is provided) and set</span>
+                    <span class="textOutput">Set</span>
+                    the video standard as either NTSC or PAL. If NTSC, you also
+                    have the option to check "Content is film" if you are either
+                    ignoring soft telecine flags or are using an inverse
+                    telecine filter. Please note that the conversion to film
+                    frames is <em>approximate</em> and may be off by a frame
+                    depending on how the source video is decimated and how that
+                    lines up with the times provided by IfoEdit. The last step
+                    is to optionally change the default chapter names to match
+                    what you see in the DVD's chapter selection menu (or just
+                    make up your own if you want).
+                </p>
+                <fieldset>
+                    <label class="fileOutput">Title<input type="text" id="title" /></label>
+                    <label>Video Standard
+                        <select id="vStandard" onchange="updateFramerate();">
+                            <option value="NTSC" selected="selected">NTSC</option>
+                            <option value="PAL">PAL</option>
+                        </select>
+                    </label>
+                    <label id="decimationControls"><input type="checkbox" id="decimate" onchange="updateFramerate();" /> Content is film (23.976)</label>
+                </fieldset>
+                <table id="chapterEditor">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Frame</th>
+                            <th>Timecode</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <input type="button" value="Next" onclick="saveOutput()"/>
+            </section>
+
+            <!--Output to file and reset-->
+            <section id="output">
+                <h2>Output Chapter Files</h2>
+                <table class="textOutput">
+                    <thead>
+                        <tr>
+                            <th>x264 qp File</th>
+                            <th>Ogg Chapter File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><textarea id="qpfText" readonly="readonly"></textarea></td>
+                            <td><textarea id="oggChaptersText" readonly="readonly"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="fileOutput" >
+                    <a id="qpfDownload">Chapters.qpf</a>
+                    <br />
+                    <a id="oggChaptersDownload">Chapters.txt</a>
+                </div>
+                <input type="reset" value="New" onclick="resetAll()" />
+            </section>
+        </div>
+    </body>
+</html>
