@@ -16,10 +16,13 @@ body{
     max-width: 72em;
     margin: 0 auto 2em;
     overflow: hidden;
+    transition: opacity 300ms;
 }
+#wrapper.fadeOut{opacity: 0;}
 h1{
     font-size: 1.5em;
     text-align: center;
+    margin: .5em 0;
 }
 h2{font-size: 1.25em;}
 h3{font-size: 1.1em;}
@@ -32,15 +35,18 @@ a[href]{
 }
 a[href]:hover{text-decoration: underline;}
 
-p,code,h1,h2{
-    margin: .5em 0;
-}
+p,code,h1,h2,fieldset,section{margin-bottom: 1em;}
 
 code{
     white-space: pre-line;
 }
 output,code{
     display: block;
+}
+
+fieldset{
+    padding: .5em;
+    border-radius: 6px;
 }
 
 textarea,input[type=text]{
@@ -54,42 +60,63 @@ textarea,input[type=text]{
 }
 
 textarea{
-    height: 40em;
+    height: 20em;
     width: 100%;
     resize: none;
     padding: .4em .5em;
     overflow-y: auto;
 }
 
-.fullTable{
+table{
     border-collapse: collapse;
-    width: 100%;
+    /*width: 100%;*/
     margin-bottom: 1em;
 }
-.fullTable, .fullTable th, .fullTable td{border: 1px solid #0485b0;}
-.fullTable thead{background-color: #035F7E;}
-td{vertical-align: top;}
-.fullTable td > textarea, .fullTable td > input[type=text]{
+table, th, td, fieldset{
+    border: 2px solid #0485b0;
+}
+thead{
+    background-color: #035F7E;
+}
+tbody tr:hover{
+    background-color: #222;
+}
+td{
+    vertical-align: top;
+    text-align: right;
+}
+td > textarea, td > input[type=text]{
     width: 100%;
     border: none;
 }
 
-#cellTimesInputArea table{margin: auto;}
-#chapterEditor td{text-align: right;}
-#chapterEditor td:first-child{text-align: center;}
+table.textOutput{
+    width: 100%;
+}
 
-.disabled, .disabled input[type=text],input[type=text]:disabled{color: #666;}
-tr, tr input[type=text]{transition: color 200ms;}
+.disabled, .disabled input[type=text],input[type=text]:disabled, .unchecked{
+    color: #666;
+}
+tr, tr input[type=text]{
+    transition: color 200ms;
+}
 
-#cellTimes{display: block;}
+.PAL #decimationControls,
+.no-filereader .fileInput,
+.filereader .textInput,
+.no-blobconstructor .fileOutput,
+.no-bloburls .fileOutput,
+.blobconstructor.bloburls .textOutput{
+    display: none;
+}
 
-#chapterEditorArea, #outputArea, #decimationWarning,
-.no-filereader #cellTimesFile,
-.filereader #cellTimes,
-.no-blobconstructor #downloadOutput, .no-bloburls #downloadOutput,
-.blobconstructor.bloburls #textOutput{display: none;}
-
-input[value=Previous]{float: left;}
-input[value=Next]{float: right;}
-
-#fade{transition: opacity 400ms;}
+#importCells, #deleteCells, #mergeCells, #editChapters, #output {
+    display: none;
+}
+.importCells #importCells,
+.deleteCells #deleteCells,
+.mergeCells #mergeCells,
+.editChapters #editChapters,
+.output #output{
+    display: block;
+}
